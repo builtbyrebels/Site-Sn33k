@@ -54,12 +54,15 @@ def process_html_files(folder_path):
             for i, chunk in enumerate(chunks):
                 documents.append({
                     'id': f'{uid}-{i}',
-                    'text': chunk,
-                    'source': file_path
+                    'pageContent': chunk, # Use the key 'pageContent' instead of 'text'
+                    'metadata': {
+                        'txtPath': file_path  # Store the file path as 'txtPath' in metadata
+                        # You can add other metadata fields if needed, similar to how 'loc' is in TypeScript
+                    }
                 })
 
             # Delete the HTML file after processing
-            os.remove(file_path)
+            # os.remove(file_path)
 
         except Exception as e:
             print(f"Error processing file {html_file}: {e}")
